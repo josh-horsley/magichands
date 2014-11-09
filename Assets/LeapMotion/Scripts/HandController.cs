@@ -11,6 +11,9 @@ using Leap;
 // Overall Controller object that will instantiate hands and tools when they appear.
 public class HandController : MonoBehaviour {
 
+	//test GIT Comment cameron
+
+
   // Reference distance from thumb base to pinky base in mm.
   protected const float GIZMO_SCALE = 5.0f;
   protected const float MM_TO_M = 0.001f;
