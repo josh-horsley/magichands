@@ -10,7 +10,16 @@ public class GestureTest : MonoBehaviour {
     public GameObject RightHand;
 
     private GameObject LeftIndex;
+    private GameObject LeftThumb;
+    private GameObject LeftMiddle;
+    private GameObject LeftRing;
+    private GameObject LeftPinky;
+
     private GameObject RightIndex;
+    private GameObject RightThumb;
+    private GameObject RightMiddle;
+    private GameObject RightRing;
+    private GameObject RightPinky;
 
     private Controller _controller;
 
@@ -73,6 +82,10 @@ public class GestureTest : MonoBehaviour {
         var riggedFingers = RightHand.transform.GetComponentsInChildren<RiggedFinger>();
 
         RightIndex = Array.Find(riggedFingers, x => x.fingerType == Finger.FingerType.TYPE_INDEX).gameObject;
+        RightThumb = Array.Find(riggedFingers, x => x.fingerType == Finger.FingerType.TYPE_THUMB).gameObject;
+        RightMiddle = Array.Find(riggedFingers, x => x.fingerType == Finger.FingerType.TYPE_MIDDLE).gameObject;
+        RightRing = Array.Find(riggedFingers, x => x.fingerType == Finger.FingerType.TYPE_RING).gameObject;
+        RightPinky = Array.Find(riggedFingers, x => x.fingerType == Finger.FingerType.TYPE_PINKY).gameObject;
     }
 
     public void SetLeftHand(GameObject hand)
@@ -86,5 +99,9 @@ public class GestureTest : MonoBehaviour {
         var riggedFingers = LeftHand.transform.GetComponentsInChildren<RiggedFinger>();
 
         LeftIndex = Array.Find(riggedFingers, x => x.fingerType == Finger.FingerType.TYPE_INDEX).gameObject;
+        LeftThumb = Array.Find(riggedFingers, x => x.fingerType == Finger.FingerType.TYPE_THUMB).gameObject;
+        LeftMiddle = Array.Find(riggedFingers, x => x.fingerType == Finger.FingerType.TYPE_MIDDLE).gameObject;
+        LeftRing = Array.Find(riggedFingers, x => x.fingerType == Finger.FingerType.TYPE_RING).gameObject;
+        LeftPinky = Array.Find(riggedFingers, x => x.fingerType == Finger.FingerType.TYPE_PINKY).gameObject;
     }
 }
