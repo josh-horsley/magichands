@@ -21,6 +21,11 @@ public class GestureTest : MonoBehaviour {
     private GameObject RightRing;
     private GameObject RightPinky;
 
+	public GameObject Fireball;
+
+	private bool bCreateLeftFireball = true,
+	bCreateRightFireball = true;
+
     private Controller _controller;
 
 	// Use this for initialization
@@ -28,6 +33,12 @@ public class GestureTest : MonoBehaviour {
     {
         _controller = HandController.leap_controller_;
         _controller.EnableGesture(Gesture.GestureType.TYPE_CIRCLE);
+
+			_controller.Config.SetFloat("Gesture.Circle.MinRadius", 50.0f);
+		_controller.Config.SetFloat("Gesture.Circle.MinArc", .5f);
+		_controller.Config.Save();
+
+
 	}
 	
 	// Update is called once per frame
@@ -54,15 +65,45 @@ public class GestureTest : MonoBehaviour {
                             
                             if (hand.IsLeft)
                             {
-                                //Debug.Log("Left: " + hand.IsLeft);
+                                
+								GameObject createdLeftFireBall = null;
+
                                 Debug.Log("left***");
                                 Debug.Log(LeftIndex.transform.position);
+
+								if(bCreateLeftFireball==true){
+									
+									createdLeftFireBall = Instantiate (Fireball,LeftIndex.transform.position + new Vector3 (0, 0, 4),Quaternion.identity) as GameObject;
+									
+									if(createdLeftFireBall != null)
+										createdLeftFireBall.rigidbody.velocity = transform.TransformDirection (new Vector3 (0, 0, 50));
+									
+									bCreateLeftFireball=false;
+								}
+									StartCoroutine (FireBallSwitchLeft());
+									
+								
                             }
                             else if (hand.IsRight)
                             {
-                                //Debug.Log("Right: " + hand.IsRight);
+                                
+								GameObject createdRightFireBall = null;
+
                                 Debug.Log("right***");
                                 Debug.Log(RightIndex.transform.position);
+
+								if(bCreateRightFireball==true){
+									
+									createdRightFireBall = Instantiate (Fireball,RightIndex.transform.position + new Vector3 (0, 0, 4),Quaternion.identity) as GameObject;
+									
+									if(createdRightFireBall != null)
+										createdRightFireBall.rigidbody.velocity = transform.TransformDirection (new Vector3 (0, 0, 50));
+									
+									bCreateRightFireball=false;
+								}	
+									StartCoroutine (FireBallSwitchRight());
+									
+
                             }
                         }
                     }
@@ -70,6 +111,37 @@ public class GestureTest : MonoBehaviour {
             }
         }
 	}
+
+	public IEnumerator FireBallSwitchLeft(){ //this launches the projectile at the enemy
+		
+		while (true) {	
+			print ("left coroutine running");
+			yield return new WaitForSeconds (1.5f);
+			bCreateLeftFireball=true;
+			return false;	
+		}
+	}
+	
+	public IEnumerator FireBallSwitchRight(){ //this launches the projectile at the enemy
+		
+		while (true) {	
+			print ("right coroutine running");
+			yield return new WaitForSeconds (1.5f);
+			bCreateRightFireball=true;
+			return false;	
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
 
     public void SetRightHand(GameObject hand)
     {
